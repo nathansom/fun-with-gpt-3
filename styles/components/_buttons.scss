@@ -1,0 +1,26 @@
+.button {
+    &-primary{
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #1A42C0;
+        color: #ffff;
+        font-weight: bold;
+        transition: all 0.5s;
+    }
+    &-primary:hover, &-primary:active, &-primary:focus, &-primary:focus-visible {
+        background-color: #2f6eeb;
+    }
+    &-secondary{
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #c01a99;
+        color: #ffff;
+        font-weight: bold;
+        transition: all 0.5s;
+    }
+    &-secondary:hover, &-secondary:active, &-secondary:focus, &-secondary:focus-visible {
+        background-color: #2f6eeb;
+    }
+}

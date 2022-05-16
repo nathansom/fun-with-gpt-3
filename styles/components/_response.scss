@@ -1,0 +1,32 @@
+.response {
+    &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #eeeeee;
+        max-width: 500px;
+    }
+    &-output {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0 5%;
+        &:nth-child(1) {
+            p {
+                margin-left: 5ch;
+            }
+            
+        }
+        &:nth-child(2) {
+            p {
+                margin-left: 3ch;
+            }
+        }
+    }
+    h3 {
+        font-weight: bold;
+    }
+    
+}
