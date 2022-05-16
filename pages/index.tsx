@@ -11,12 +11,16 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const localData = window.localStorage.getItem("gpt-3-records");
-    localData && setRecords(JSON.parse(localData));
-  }, []);
+    localData && setRecords(JSON.parse(localData) || []);
+  }, [prompt, response]);
 
-  const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setPrompt(e.target.value);
-  }
+  };
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,11 +54,12 @@ const Home: NextPage = () => {
 
   const updateRecords = () => {
     setRecords([...records, { prompt: prompt, response: response }]);
-    window.localStorage.setItem("gpt-3-records", JSON.stringify(records));
   }
 
   useEffect( () => {
     updateRecords();
+    records && window.localStorage.setItem("gpt-3-records", JSON.stringify(records));
+
     setPrompt("");
     setResponse("");
   }, [response] )

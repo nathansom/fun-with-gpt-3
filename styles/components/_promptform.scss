@@ -4,8 +4,21 @@
         flex-direction: column;
         textarea {
             margin: 10px 0;
+            padding: 10px;
             width: 500px;
             max-width: 90vw;
         }
     }
+    &-selection {
+        margin: 10px 0;
+    }
+}
+
+select {
+    cursor: pointer;
+    padding: 5px;
+}
+
+option {
+    padding: 5px;
 }
