@@ -1,8 +1,5 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import Button from '../components/Button/Button';
-import React, { TextareaHTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PromptForm from '../components/PromptForm/PromptForm';
 import ResponseCard from '../components/ResponseCard/ResponseCard';
 import type { ResponseProps } from '../components/ResponseCard/ResponseCard';
@@ -11,6 +8,11 @@ const Home: NextPage = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [records, setRecords] = useState<ResponseProps[]>([]);
+
+  useEffect(() => {
+    const localData = window.localStorage.getItem("gpt-3-records");
+    localData && setRecords(JSON.parse(localData));
+  }, []);
 
   const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
@@ -48,10 +50,13 @@ const Home: NextPage = () => {
 
   const updateRecords = () => {
     setRecords([...records, { prompt: prompt, response: response }]);
+    window.localStorage.setItem("gpt-3-records", JSON.stringify(records));
   }
 
   useEffect( () => {
     updateRecords();
+    setPrompt("");
+    setResponse("");
   }, [response] )
 
   return (
