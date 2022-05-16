@@ -1,12 +1,17 @@
 .response {
+    &-section {
+        display: flex;
+        flex-direction: column-reverse;
+    }
     &-container {
         display: flex;
         flex-direction: column;
         align-items: stretch;
         padding: 5px;
-        border-radius: 3px;
+        border-radius: 5px;
         background-color: #eeeeee;
         max-width: 500px;
+        margin: 20px 0;
     }
     &-output {
         display: flex;

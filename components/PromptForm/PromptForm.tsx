@@ -8,11 +8,12 @@ type PromptFormProps = {
 
 const PromptForm = ({ promptInput, updatePrompt, submitPrompt }:PromptFormProps) => {
     return (
-        <form onSubmit={submitPrompt}>
+        <form className="prompt-form" onSubmit={submitPrompt}>
           <label htmlFor="prompt-input">Enter prompt</label>
           <textarea 
             id="prompt-input" 
             name="prompt-input" 
+            className="prompt-input"
             value={promptInput} 
             onChange={updatePrompt} 
           />

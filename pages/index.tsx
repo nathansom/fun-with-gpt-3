@@ -2,11 +2,15 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Button from '../components/Button/Button';
-import React, { TextareaHTMLAttributes, useState } from 'react';
+import React, { TextareaHTMLAttributes, useEffect, useState } from 'react';
 import PromptForm from '../components/PromptForm/PromptForm';
+import ResponseCard from '../components/ResponseCard/ResponseCard';
+import type { ResponseProps } from '../components/ResponseCard/ResponseCard';
 
 const Home: NextPage = () => {
   const [prompt, setPrompt] = useState<string>("");
+  const [response, setResponse] = useState<string>("");
+  const [records, setRecords] = useState<ResponseProps[]>([]);
 
   const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
@@ -14,8 +18,41 @@ const Home: NextPage = () => {
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setPrompt('');
+
+    const data = {
+      prompt: prompt,
+      temperature: 0.5,
+      max_tokens: 64,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0
+    }
+
+    const url = process.env.NEXT_PUBLIC_OPENAI_ENDPOINT as RequestInfo;
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data: any) => {
+        setResponse(data.choices[0].text);
+        updateRecords();
+      })
+      .catch((e) => console.error(e));
   }
+
+  const updateRecords = () => {
+    setRecords([...records, { prompt: prompt, response: response }]);
+  }
+
+  useEffect( () => {
+    updateRecords();
+  }, [response] )
 
   return (
     <div className="container">
@@ -34,16 +71,20 @@ const Home: NextPage = () => {
 
         <section>
           <h2>Responses</h2>
-          <article className="response-container">
-            <div className="response-output">
-              <h3>Prompt:</h3>
-              <p>oooooo</p>
-            </div>
-            <div className="response-output">
-              <h3>Response:</h3>
-              <p>ppppppp</p>
-            </div>
-          </article>
+          <div className="response-section">
+            {records &&
+              records.map((record, i) => {
+                return (
+                  record.prompt && record.response
+                  ?<ResponseCard
+                    key={i}
+                    prompt={record.prompt}
+                    response={record.response}
+                  />
+                  : null
+                );
+              })}
+          </div>
         </section>
       </main>
     </div>
