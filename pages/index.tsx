@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PromptForm from '../components/PromptForm/PromptForm';
 import ResponseCard from '../components/ResponseCard/ResponseCard';
 import type { ResponseProps } from '../components/ResponseCard/ResponseCard';
+import Footer from '../layouts/Footer/Footer';
 
 const Home: NextPage = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -70,8 +71,7 @@ const Home: NextPage = () => {
         <h1>Fun with AI</h1>
       </header>
       <main>
-        <section>
-          <p>prompt:{prompt}</p>
+        <section id="prompt-section">
           <PromptForm
             promptInput={prompt}
             updatePrompt={handleChange}
@@ -79,24 +79,26 @@ const Home: NextPage = () => {
           />
         </section>
 
-        <section>
+        <section id="response-section" className="response-section">
           <h2>Responses</h2>
-          <div className="response-section">
-            {records &&
+          <div className="response-wrapper">
+            {records[1] ?
               records.map((record, i) => {
-                return (
-                  record.prompt && record.response
-                  ?<ResponseCard
+                return record.prompt && record.response ? (
+                  <ResponseCard
                     key={i}
                     prompt={record.prompt}
                     response={record.response}
                   />
-                  : null
-                );
-              })}
+                ) : null;
+              }) :
+              <div className='response-container'>
+                Enter a prompt to see what the GPT-3 AI can do
+              </div>}
           </div>
         </section>
       </main>
+      <Footer text="Made with ❤️ by Nathan Somsa-ard" />
     </div>
   );
 }

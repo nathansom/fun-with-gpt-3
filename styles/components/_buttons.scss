@@ -1,28 +1,27 @@
 .button {
-    &-primary{
-        padding: 10px 20px;
+    padding: 10px 20px;
         border-radius: 5px;
         border: none;
         cursor: pointer;
-        background-color: #1A42C0;
-        color: #ffff;
         font-weight: bold;
         transition: all 0.5s;
+    &-primary{
+        @extend .button;
+        background-image: $primary-color;
+        background-size: 1000px;
+        background-position: 700px;
+        color: $text-color-dark;
     }
     &-primary:hover, &-primary:active, &-primary:focus, &-primary:focus-visible {
-        background-color: #2f6eeb;
+        background-position: 1000px;
+
     }
     &-secondary{
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        background-color: #c01a99;
-        color: #ffff;
-        font-weight: bold;
-        transition: all 0.5s;
+        @extend .button;
+        background-color: $secondary-color;
+        color: $text-color-dark;
     }
     &-secondary:hover, &-secondary:active, &-secondary:focus, &-secondary:focus-visible {
-        background-color: #2f6eeb;
+        background-color: $secondary-color--focus;
     }
 }

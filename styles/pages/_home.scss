@@ -4,3 +4,22 @@
   align-items: center;
   margin: 0 10px;
 }
+
+body {
+  background: $bg-dark;
+  color: $text-color-dark;
+}
+
+header {
+  h1 {
+    @include gradient-text;
+    font-family: 'Monoton', cursive;
+    font-size: 3rem;
+    margin-top: 20px;
+  }
+}
+
+h2 {
+    @include gradient-text;
+    background-position: 450px;
+  }
