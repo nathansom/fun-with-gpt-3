@@ -1,5 +1,7 @@
 # fun-with-gpt-3
 
+Try now @ https://fun-with-gpt-3-pi.vercel.app/ 
+
 By Nathan Somsa-ard
 
 A simple web app built with ReactJS/NextJS that lets users play with the GPT-3 AI model from Open AI through a simple, friendly user interface.
