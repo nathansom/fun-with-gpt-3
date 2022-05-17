@@ -3,12 +3,7 @@
   'abstracts/mixins';
 
 @import
-  'vendors/bootstrap';
-
-@import
-  'base/base',
-  'base/reset',
-  'base/typography';
+  'base/base';
 
 @import
   'components/buttons',
@@ -20,6 +15,3 @@
 
 @import
   'pages/home';
-
-@import
-  'themes/theme';
