@@ -1,0 +1,33 @@
+.loading {
+    &-icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgb(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    &-animation {
+        animation-name: loading;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes loading {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .loading-animation {
+        animation-duration: 0s;
+    }
+}

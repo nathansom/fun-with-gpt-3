@@ -5,11 +5,13 @@ import ResponseCard from '../components/ResponseCard/ResponseCard';
 import type { ResponseProps } from '../components/ResponseCard/ResponseCard';
 import Footer from '../layouts/Footer/Footer';
 import Head from 'next/head';
+import LoadingIcon from '../components/LoadingIcon/LoadingIcon';
 
 const Home: NextPage = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [records, setRecords] = useState<ResponseProps[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   
   useEffect(() => {
     const localData = window.localStorage.getItem("gpt-3-records");
@@ -36,6 +38,7 @@ const Home: NextPage = () => {
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const data = {
       prompt: prompt,
@@ -60,6 +63,7 @@ const Home: NextPage = () => {
       .then((data: any) => {
         setResponse(data.choices[0].text);
         updateRecords();
+        setIsLoading(false);
       })
       .catch((e) => console.error(e));
   }
@@ -97,7 +101,7 @@ const Home: NextPage = () => {
             submitPrompt={handleSubmit}
           />
         </section>
-
+        {isLoading && <LoadingIcon />}
         <section id="response-section" className="response-section">
           <h2>Responses</h2>
           <div className="response-wrapper">
