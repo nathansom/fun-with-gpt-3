@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PromptForm from '../components/PromptForm/PromptForm';
 import ResponseCard from '../components/ResponseCard/ResponseCard';
 import type { ResponseProps } from '../components/ResponseCard/ResponseCard';
@@ -79,6 +79,7 @@ const Home: NextPage = () => {
     
     setPrompt("");
     setResponse("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response] )
 
   return (
